@@ -23,11 +23,46 @@ for item in [pot1,pot2,pot3,pot4]:
     p1['seed'] = [num for num2 in range(len(item))]
     df = df.append(p1)
     num+=1
+df = df.reset_index(drop=True)
 del item, num, num2, p1, pot1, pot2, pot3, pot4
 
 group_names = ['A','B','C','D','E','F','G','H']
-groups = dict([(item,[]) for item in group_names])
+groups = dict([(item,{'group':pd.DataFrame(columns=['team','conf']),'count_conf':pd.DataFrame(),'used_pos':[]}) for item in group_names])
 
+# 1st seeds
+s1 = df[df['seed']==1][['team','conf']]
+s1_teams = list(s1['team'])
+for item in group_names:
+    if item=='A':
+        s1_teams = filter(lambda x:x!='Russia',s1_teams)
+        g_0 = s1[s1['team']=='Russia']
+        g_0.loc[:,'pos'] = pd.Series([1],index=g_0.index)
+        g = groups[item]['group'].append(g_0)
+        groups[item]['group'] = g
+        c = g.groupby('conf')['team'].count().reset_index()
+        groups[item]['count_conf'] = c
+        groups[item]['used_pos'].append(1)
+    else:
+        t1 = random.choice(s1_teams)
+        s1_teams = filter(lambda x:x!=t1,s1_teams)
+        g_0 = s1[s1['team']==t1]
+        g_0.loc[:,'pos'] = pd.Series([1],index=g_0.index)
+        g = groups[item]['group'].append(g_0)
+        groups[item]['group'] = g
+        c = g.groupby('conf')['team'].count().reset_index()
+        groups[item]['count_conf'] = c
+        groups[item]['used_pos'].append(1)
+
+
+
+
+
+
+
+
+
+
+##########
 # 1st seeds
 s1 = df[df['seed']==1][['team','conf']]
 t_list = list(s1['team'])

@@ -5,6 +5,8 @@ Created on Wed Nov 29 12:47:03 2017
 @author: cdonovan
 """
 
+# Python 2.7
+
 import pandas as pd
 import numpy as np
 import random

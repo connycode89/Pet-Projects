@@ -11,6 +11,21 @@ import pandas as pd
 import numpy as np
 import random
 
+def check_allocations(df):
+    df2 = df[df['team']>=2]
+    if len(df2)==0:
+        return True
+    elif len(df2)>1:
+        return False
+    elif len(df2)==1:
+        if df2['conf'].values[0]=='UEFA':
+            if df2['team']==2:
+                return True
+            else:
+                return False
+        else:
+            return False
+
 pot1 = [('Russia','UEFA'), ('Germany','UEFA'), ('Brazil','CONMEBOL'), ('Portugal','UEFA'), ('Argentina','CONMEBOL'), ('Belgium','UEFA'), ('Poland','UEFA'), ('France','UEFA')]
 pot2 = [('Spain','UEFA'), ('Peru','CONMEBOL'), ('Switzerland','UEFA'), ('England','UEFA'), ('Colombia','CONMEBOL'), ('Uruguay','CONMEBOL'), ('Mexico','CONCACAF'), ('Croatia','UEFA')]
 pot3 = [('Denmark','UEFA'), ('Iceland','UEFA'), ('Costa Rica','CONCACAF'), ('Sweden','UEFA'), ('Tunisia','CAF'), ('Egypt','CAF'), ('Senegal','CAF'), ('Iran','AFC')]
@@ -53,7 +68,7 @@ for item in group_names:
         groups[item]['count_conf'] = c
         groups[item]['used_pos'].append(1)
 
-
+# 2nd seeds
 
 
 

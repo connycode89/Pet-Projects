@@ -36,12 +36,12 @@ def draw(path1, n_groups):
     rearrange = randomize(col1)
     draw_list = []
     for item in format1:
-        first = col1[:item]
+        first = rearrange[:item]
         draw_list.append(first)
-        col1 = [item for item in col1 if item not in first]
+        rearrange = [item for item in rearrange if item not in first]
     return draw_list
     
 
-#path = 'C:\\Users\\cdonovan\\Downloads\\Table Tennis Registration.csv.zip'
-path = 'C:\\Users\\Conor\\Downloads\\Table Tennis Registration.csv.zip'
-results = draw(path, 2)
+path = 'C:\\Users\\cdonovan\\Downloads\\Table Tennis Registration.csv.zip'
+#path = 'C:\\Users\\Conor\\Downloads\\Table Tennis Registration.csv.zip'
+results = draw(path, 3)

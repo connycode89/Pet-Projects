@@ -44,7 +44,7 @@ def training(learning_rate, num_epochs):
     a2 = decoder(a1)
     # Mean Squared Error Loss + RMSProp optimizer with learning rate = 0.001
     loss = tf.reduce_mean(tf.pow(x-a2, 2))
-    optimizer = tf.train.RMSPropOptimizer(0.001).minimize(loss)
+    optimizer = tf.train.RMSPropOptimizer(learning_rate).minimize(loss)
     init = tf.global_variables_initializer()
     # train model for 100,000 epochs
     a = []

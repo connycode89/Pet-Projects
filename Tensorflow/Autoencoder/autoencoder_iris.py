@@ -25,7 +25,7 @@ def encoder(input_data):
     x = tf.placeholder(tf.float32, shape=input_data.shape)
     # defining hidden layer - 2 nodes given by weights w1 and bias b1
     # sigmoid activation a1
-    w1 = tf.get_variable(name='w1', shape=[4,2], initializer=tf.random_normal_initializer())
+    w1 = tf.get_variable(name='w1', shape=[4,2], initializer=tf.random_normal_initializer(seed=42))
     b1 = tf.get_variable(name='b1', shape=[2], initializer=tf.constant_initializer(0))
     a1 = tf.nn.sigmoid(tf.matmul(x, w1)+b1)
     return x, a1
@@ -33,7 +33,7 @@ def encoder(input_data):
 def decoder(activation):
     # output layer - 4 nodes given by weights w2 and bias b2 - no non-linear activation
     # activation = result of sigmoid activation from hidden layer
-    w2 = tf.get_variable(name='w2', shape=[2,4], initializer=tf.random_normal_initializer())
+    w2 = tf.get_variable(name='w2', shape=[2,4], initializer=tf.random_normal_initializer(seed=42))
     b2 = tf.get_variable(name='b2', shape=[4], initializer=tf.constant_initializer(0))
     a2 = tf.matmul(activation, w2)+b2
     return a2
